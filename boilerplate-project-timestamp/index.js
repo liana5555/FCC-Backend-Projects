@@ -24,7 +24,7 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.get("/api/:date?", function (req, res) {
-  const date_string = Number(req.params.date);
+  const date_string = req.params.date;
   if (!date_string) {
     const dateNow = Date.now();
 
@@ -40,7 +40,7 @@ app.get("/api/:date?", function (req, res) {
 
   const date = new Date(date_string);
   console.log(date);
-  return res.json({ unix: date_string, utc: date.toString() });
+  return res.json({ unix: Number(date_string), utc: date.toString() });
 });
 
 // Listen on port set in environment variable or default to 3000
