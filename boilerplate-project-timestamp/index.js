@@ -35,7 +35,7 @@ app.get("/api/:date?", function (req, res) {
     return res.json({ error: "Invalid Date" });
   }
 
-  const date = new Date(parseInt(date_string));
+  const date = new Date(date_string);
   console.log(date);
   return res.json({ unix: date_string, utc: date.toString() });
 });
