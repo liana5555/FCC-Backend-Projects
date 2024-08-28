@@ -28,16 +28,18 @@ app.get("/api/:date?", function (req, res) {
   if (!date_string) {
     const dateNow = Date.now();
 
-    return res.json({ unix: dateNow, utc: new Date(dateNow).toString() });
-  }
-  const regex = /[^0-9]/g;
-  if (date_string.match(regex) !== null) {
-    return res.json({ error: "Invalid Date" });
+    return res.json({
+      unix: Number(dateNow),
+      utc: new Date(dateNow).toString(),
+    });
   }
 
-  const date = new Date(date_string);
-  console.log(date);
-  return res.json({ unix: date_string, utc: date.toString() });
+  const date = new Date(Number(date_string));
+  if (date === "Invalid Date") {
+    return res.json({ error: date });
+  } else {
+    return res.json({ unix: Number(date_string), utc: date.toString() });
+  }
 });
 
 // Listen on port set in environment variable or default to 3000
