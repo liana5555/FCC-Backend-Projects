@@ -30,7 +30,7 @@ app.get("/api/:date?", function (req, res) {
 
     return res.json({
       unix: Number(dateNow),
-      utc: new Date(dateNow).toString(),
+      utc: new Date(dateNow).toUTCString(),
     });
   }
   const regex = /[^0-9]/g;
@@ -38,9 +38,9 @@ app.get("/api/:date?", function (req, res) {
     return res.json({ error: "Invalid Date" });
   }
 
-  const date = new Date(date_string);
+  const date = new Date(Number(date_string));
   console.log(date);
-  return res.json({ unix: Number(date_string), utc: date.toString() });
+  return res.json({ unix: Number(date_string), utc: date.toUTCString() });
 });
 
 // Listen on port set in environment variable or default to 3000
