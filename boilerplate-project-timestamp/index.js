@@ -41,6 +41,10 @@ app.get("/api/:date?", function (req, res) {
   }
  
   let date;
+
+  let isValidDate = Date.parse(date_string);
+
+  console.log(isValidDate);
  
 
   
@@ -50,7 +54,7 @@ app.get("/api/:date?", function (req, res) {
     response = { unix: Number(date_string),
       utc: date.toUTCString() };
   }
-  else if(date_string.includes("-")) {
+  else if(isValidDate) {
     date = new Date(date_string);
    
     response =  {
